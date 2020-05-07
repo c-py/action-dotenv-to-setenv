@@ -30,7 +30,7 @@ Adapted from https://github.com/madcoda/dotenv-shell
 ## Example Usage
 
 ```
-uses: c-py/action-dotenv-to-setenv@latest
+uses: c-py/action-dotenv-to-setenv@v1
 with:
   env-file: .env
 ```
