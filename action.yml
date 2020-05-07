@@ -1,0 +1,12 @@
+name: 'Dotenv to Setenv'
+description: 'Export a .env file to environment variables (via set-env)'
+inputs:
+  env-file:
+    description: 'Path to the .env file (Default: .env)'
+    required: true
+    default: '.env'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.env-file }}
