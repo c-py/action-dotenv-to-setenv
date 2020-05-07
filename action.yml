@@ -1,5 +1,9 @@
-name: 'Dotenv to Setenv'
-description: 'Export a .env file to environment variables (via set-env)'
+name: 'Environment Variables from Dotenv'
+author: "c-py"
+description: 'Export environment variables from a "dotenv" file into GitHub Actions via set-env workflow commands'
+branding:
+  icon: settings
+  color: orange
 inputs:
   env-file:
     description: 'Path to the .env file (Default: .env)'
