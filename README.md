@@ -60,5 +60,6 @@ Testing overwrite of existing variables: ok
 Testing parsing of last line: ok
 Test loading variables from default.env file: ok
 Test .env variables override variables from default.env file: ok
+Test error message from missing .env file: ok
 $
 ```
