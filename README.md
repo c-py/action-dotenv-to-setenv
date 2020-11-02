@@ -30,7 +30,7 @@ echo "TEST_NO_NEWLINE=still there" >> $GITHUB_ENV
 ## Example Usage
 
 ```
-uses: c-py/action-dotenv-to-setenv@v1
+uses: c-py/action-dotenv-to-setenv@v2
 with:
   env-file: .env
 ```
