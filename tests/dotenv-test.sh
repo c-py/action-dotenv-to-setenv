@@ -3,10 +3,15 @@
 main() {
     cd "$( dirname "${BASH_SOURCE[0]}" )" || exit 1
 
+    export GITHUB_ENV=$(mktemp)
     # shellcheck disable=SC1091
     export TEST_EXISTING="expected"
     export DOTENV_DEFAULT="default.env"
     source ../dotenv.sh
+
+    echo "Contents of \$GITHUB_ENV file:"
+    cat "$GITHUB_ENV"
+    echo
 
     echo "Testing blank line parsing: ok" # i.e. didn't crash
     assert_equal "$TEST_UNQUOTED" 'a=1 b=2 c=3' 'Testing unquoted'
@@ -18,8 +23,10 @@ main() {
     assert_equal "$TEST_DEFAULT_ENVFILE" 'expected' 'Test loading variables from default.env file'
     assert_equal "$TEST_DOTENV_OVERRIDES_DEFAULT" 'expected' 'Test .env variables override variables from default.env file'
 
-    TEST_NO_ENVFILE=`DOTENV_FILE=nonexistent.env ../dotenv.sh 2>&1 >&3 3>&-` # Close stdout for this test
+    TEST_NO_ENVFILE=`DOTENV_FILE=nonexistent.env ../dotenv.sh 2>&1` # Close stdout for this test
     assert_equal "$TEST_NO_ENVFILE" "nonexistent.env file not found" 'Test error message from missing .env file'
+
+    rm "$GITHUB_ENV"
 }
 
 assert_equal() {

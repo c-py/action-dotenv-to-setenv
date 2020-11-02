@@ -56,9 +56,9 @@ export_envs() {
 			continue
 		fi
 
-        value=$(eval echo "$temp")
-        eval export "$key='$value'";
-		echo "::set-env name=$key::$value"
+		value=$(eval echo "$temp")
+		eval export "$key='$value'";
+			echo "$key=$value" >> $GITHUB_ENV
 	done < $1
 }
 
