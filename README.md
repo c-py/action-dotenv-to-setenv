@@ -1,6 +1,6 @@
 # action-dotenv-to-setenv
 
-GitHub action to export a `.env` file to environment variables (via [set-env](https://help.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable))
+GitHub action to export a `.env` file to environment variables (via [$GITHUB_ENV](https://help.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-environment-variable))
 
 Adapted from https://github.com/madcoda/dotenv-shell
 
