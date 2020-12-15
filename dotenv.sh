@@ -56,9 +56,14 @@ export_envs() {
 			continue
 		fi
 
-		value=$(eval echo "$temp")
+		# Strip any existing quotes
+		temp="${temp%[\'\"]}";
+		temp="${temp#[\'\"]}";
+		# Add new double quotes for interpolation
+		value=$(eval echo "\"$temp\"");
+
 		eval export "$key='$value'";
-			echo "$key=$value" >> $GITHUB_ENV
+		echo "$key=$value" >> $GITHUB_ENV;
 	done < $1
 }
 
