@@ -56,11 +56,14 @@ export_envs() {
 			continue
 		fi
 
-		# Strip any existing quotes
-		temp="${temp%[\'\"]}";
-		temp="${temp#[\'\"]}";
-		# Add new double quotes for interpolation
-		value=$(eval echo "\"$temp\"");
+		# check if $temp doesn't start with with ' or ", and quote it if so
+		if [ "${temp%%[\"\']*}" = "${temp}" ]; then
+			temp="\"${temp}\""
+		fi
+
+		# We have already quoted if necessary, so we can safely eval it
+		# shellcheck disable=SC2086
+		value=$(eval echo ${temp});
 
 		eval export "$key='$value'";
 		echo "$key=$value" >> $GITHUB_ENV;
