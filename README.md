@@ -37,14 +37,14 @@ with:
 
 ## Usage with `NODE_OPTIONS`
 
+Unfortunately, `NODE_OPTIONS` cannot be set in this action due to GitHub [security settings](https://github.com/c-py/action-dotenv-to-setenv/issues/9). To work around this `NODE_OPTIONS` is automatically output under `node_options`.
+
 ```
   - uses: c-py/action-dotenv-to-setenv@v2
     id: source-env
     with:
       env-file: .env
-  
-  - 
-
+  - run: echo ${{ steps.source-env.outputs.node_options }} 
 ```
 
 
