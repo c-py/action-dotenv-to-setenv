@@ -46,6 +46,10 @@ is_blank() {
 	return 1
 }
 
+is_node_options() {
+   [[ "$1" == "NODE_OPTIONS" ]]
+}
+
 export_envs() {
 	while IFS='=' read -r key temp || [ -n "$key" ]; do
 		if is_comment "$key"; then
@@ -64,6 +68,12 @@ export_envs() {
 		# We have already quoted if necessary, so we can safely eval it
 		# shellcheck disable=SC2086
 		value=$(eval echo ${temp});
+
+                # If this is node options output it to GITHUB_OUTPUT
+                if is_node_options "$key"; then
+                        echo "node_options=$value" >> $GITHUB_OUTPUT
+                        continue
+                fi
 
 		eval export "$key='$value'";
 		echo "$key=$value" >> $GITHUB_ENV;

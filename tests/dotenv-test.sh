@@ -4,6 +4,7 @@ main() {
     cd "$( dirname "${BASH_SOURCE[0]}" )" || exit 1
 
     export GITHUB_ENV=$(mktemp)
+    export GITHUB_OUTPUT=$(mktemp)
     # shellcheck disable=SC1091
     export TEST_EXISTING="expected"
     export DOTENV_DEFAULT="default.env"
@@ -29,6 +30,9 @@ main() {
 
     TEST_NO_ENVFILE=`DOTENV_FILE=nonexistent.env ../dotenv.sh 2>&1` # Close stdout for this test
     assert_equal "$TEST_NO_ENVFILE" "nonexistent.env file not found" 'Test error message from missing .env file'
+   
+    assert_equal "$NODE_OPTIONS" "" "Test NODE_OPTIONS skipped"
+    assert_equal "$(cat $GITHUB_OUTPUT)" "node_options=--max-old-space-size=2048" "Test NODE_OPTIONS set in output"
 
     rm "$GITHUB_ENV"
 }
