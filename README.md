@@ -30,7 +30,7 @@ echo "TEST_NO_NEWLINE=still there" >> $GITHUB_ENV
 ## Example Usage
 
 ```
-uses: c-py/action-dotenv-to-setenv@v2
+uses: c-py/action-dotenv-to-setenv@v5
 with:
   env-file: .env
 ```
@@ -40,7 +40,7 @@ with:
 Unfortunately, `NODE_OPTIONS` cannot be set in this action due to GitHub [security settings](https://github.com/c-py/action-dotenv-to-setenv/issues/9). To work around this `NODE_OPTIONS` is automatically output under `node_options`.
 
 ```
-  - uses: c-py/action-dotenv-to-setenv@v2
+  - uses: c-py/action-dotenv-to-setenv@v5
     id: source-env
     with:
       env-file: .env
