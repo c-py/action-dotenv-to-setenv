@@ -14,6 +14,7 @@ jobs:
       with:
         env-file: tests/.env
     - name: Test GITHUB_OPTIONS is output
-      if: ${{ !steps.source-env.outputs.node_options && steps.source-env.conclusion == 'failure' }}
+      if: ${{ !steps.source-env.outputs.node_options }}
+      run: echo ":error GITHUB_OPTIONS not set in output"
 
 
