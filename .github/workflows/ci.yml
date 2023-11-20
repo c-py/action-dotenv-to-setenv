@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set Environment
+      id: source-env
+      uses: ./
+      with:
+        env-file: tests/.env
+    - name: Test GITHUB_OPTIONS is output
+      if: ${{ !steps.source-env.outputs.node_options && steps.source-env.conclusion == 'failure' }}
+
+
