@@ -1,0 +1,18 @@
+name: CI
+
+on: push
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set Environment
+      id: source-env
+      uses: ./
+      with:
+        env-file: tests/.env
+    - name: Test GITHUB_OPTIONS is output
+      if: ${{ !steps.source-env.outputs.node_options }}
+      run: exit 1
